@@ -13,6 +13,8 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
   @Value("${mongo.db.password}")
   private String password;
 
+  @Value("${mongo.db.user}")
+  private String user;
   @Override
   protected String getDatabaseName() {
     return "Blogango";
@@ -21,8 +23,8 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
   @Override
   public MongoClient mongoClient() {
 
-    String uriTemplate = "mongodb+srv://isaque:%s@cluster0.cp3qm.mongodb.net/Blogango?retryWrites=true&w=majority&appName=Cluster0";
-    String finalConnectionString = String.format(uriTemplate, password);
+    String uriTemplate = "mongodb+srv://%s:%s@cluster0.cp3qm.mongodb.net/Blogango?retryWrites=true&w=majority&appName=Cluster0";
+    String finalConnectionString = String.format(uriTemplate, user, password);
 
     ConnectionString connectionString = new ConnectionString(finalConnectionString);
 
