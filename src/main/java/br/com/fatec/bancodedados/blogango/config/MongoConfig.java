@@ -15,6 +15,7 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
 
   @Value("${mongo.db.user}")
   private String user;
+
   @Override
   protected String getDatabaseName() {
     return "Blogango";
