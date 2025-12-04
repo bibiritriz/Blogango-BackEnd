@@ -4,6 +4,12 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+# --- Arquivos de Compilação---
+/target/
+*.class
+*.jar
+*.war
+
 ### STS ###
 .apt_generated
 .classpath
@@ -19,6 +25,11 @@ target/
 *.iml
 *.ipr
 
+# --- Logs e Arquivos Temporários ---
+*.log
+logs/
+temp/
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -29,5 +40,12 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+# --- SEGURANÇA ---
+.env
+secrets.properties
+
 ### VS Code ###
 .vscode/
+.settings/
+.classpath
+.project
