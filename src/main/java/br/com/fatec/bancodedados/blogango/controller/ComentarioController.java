@@ -60,4 +60,12 @@ public class ComentarioController {
     this.comentarioService.editarComentario(comentarioId, comentarioEditDTO);
     return ResponseEntity.noContent().build();
   }
+
+  @PatchMapping("/{comentarioId}/aprovar")
+  public ResponseEntity<Void> aprovarComentario(
+          @PathVariable String comentarioId
+  ){
+    this.comentarioService.aprovarComentario(comentarioId);
+    return ResponseEntity.noContent().build();
+  }
 }

@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface ComentarioRepository extends MongoRepository<Comentario, String> {
   Page<Comentario> findByPostId(String postId, Pageable pageable);
 
-
+  Long countByPostIdAndAprovado(String postId, Boolean aprovado);
 }
