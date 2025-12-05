@@ -1,6 +1,5 @@
 package br.com.fatec.bancodedados.blogango.model;
 
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -9,8 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 
 @Data
@@ -40,8 +38,8 @@ public class Post {
     @Size(min=1, max=5)
     private List<Categoria> categorias;
 
-    private LocalDateTime dataCriacao = LocalDateTime.now();
-    private LocalDateTime dataAtualizacao = LocalDateTime.now();
+    private Instant dataCriacao = Instant.now();
+    private Instant dataAtualizacao = Instant.now();
 
     private StatusPost status = StatusPost.RASCUNHO;
 
