@@ -9,6 +9,7 @@ import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface PostMapper {
+    @Mapping(target = "categorias", ignore = true)
     Post toEntity(PostCreateDTO dto);
 
     @Mapping(target = "categorias", ignore = true)

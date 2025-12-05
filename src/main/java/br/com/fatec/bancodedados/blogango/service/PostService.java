@@ -37,7 +37,7 @@ public class PostService {
     }
 
     private String gerarSlug(String titulo){
-        int quantidade = postRepository.findBySlug(titulo);
+        long quantidade = postRepository.countBySlug(titulo);
 
         String quantidadeParaSlug = "-" + String.valueOf(quantidade);
 
@@ -54,6 +54,7 @@ public class PostService {
     public Post criarPost(PostCreateDTO dto){
         Post novoPost = postMapper.toEntity(dto);
 
+        novoPost.setCategorias(categoriaService.buscarCategoriasPorId(dto.categorias()));
         novoPost.setSlug(gerarSlug(novoPost.getTitulo()));
 
         return postRepository.save(novoPost);

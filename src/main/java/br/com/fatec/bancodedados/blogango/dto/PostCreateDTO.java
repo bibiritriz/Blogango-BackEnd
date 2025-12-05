@@ -17,7 +17,8 @@ public record PostCreateDTO (
         @NotBlank(message = "Autor é obrigatório")
         @Size(min = 3, max = 100, message = "Autor deve ter entre 3 e 100 caracteres")
         String autor,
-        @NotNull(message = "Categoria é obrigatória")
-        @Size(min=1, max=5)
-        List<Categoria> categorias) {
+        @NotNull(message = "Categorias são obrigatórias")
+        @NotBlank(message = "Categorias não pode ser vazio")
+        @Size(min=1, max=5, message = "Deve haver ao menos 1 id de categoria em categorias")
+        List<String> categorias) {
 }

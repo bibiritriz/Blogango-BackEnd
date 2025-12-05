@@ -3,6 +3,7 @@ package br.com.fatec.bancodedados.blogango.dto;
 import br.com.fatec.bancodedados.blogango.model.Categoria;
 import br.com.fatec.bancodedados.blogango.model.StatusPost;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -17,8 +18,9 @@ public record PostUpdateDTO(
     @Size(min = 50, max = 5000, message = "Conteúdo deve ter entre 50 e 5000 caracteres")
     String conteudo,
 
-    @NotBlank(message = "Categorias é obrigatória")
-    @Size(min=1, max=5, message = "Categorias deve ter pelo menos 1 id de categoria")
+    @NotNull(message = "Categorias são obrigatórias")
+    @NotEmpty(message = "Categorias não podem ser vazia")
+    @Size(min=1, max=5, message = "Categorias devem ter pelo menos 1 id de categoria")
     List<String> categorias,
 
     StatusPost status) {

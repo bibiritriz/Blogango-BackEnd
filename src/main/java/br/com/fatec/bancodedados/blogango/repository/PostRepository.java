@@ -15,5 +15,5 @@ public interface PostRepository extends MongoRepository<Post, String> {
 
     Page<Post> findByStatusAndTituloContainingIgnoreCaseOrderByDataCriacaoDesc(StatusPost status, String titulo, Pageable pageable);
 
-    int findBySlug(String slug);
+    long countBySlug(String slug);
 }
