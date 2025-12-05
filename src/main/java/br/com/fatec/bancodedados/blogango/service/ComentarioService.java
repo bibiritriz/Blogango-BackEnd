@@ -58,7 +58,7 @@ public class ComentarioService {
 
   public void aprovarComentario(String comentarioId){
     Comentario comentario = this.comentarioRepository.findById(comentarioId).orElseThrow(
-            () -> new ResourceNotFoundException("Comentário não encontado com ID: " + comentarioId));
+            () -> new ResourceNotFoundException("Comentário não encontrado com ID: " + comentarioId));
 
     comentario.setAprovado(true);
     this.comentarioRepository.save(comentario);
