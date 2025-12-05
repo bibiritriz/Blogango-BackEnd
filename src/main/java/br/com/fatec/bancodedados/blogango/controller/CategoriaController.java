@@ -34,7 +34,7 @@ public class CategoriaController {
                 .buildAndExpand(categoria.getId())
                 .toUri();
 
-        return ResponseEntity.created(uri).body(uri);
+        return ResponseEntity.created(uri).body(categoria.getId());
     }
 
     @GetMapping
