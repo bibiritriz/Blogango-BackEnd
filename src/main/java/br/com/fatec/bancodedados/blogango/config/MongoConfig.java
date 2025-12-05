@@ -10,11 +10,8 @@ import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 
 @Configuration
 public class MongoConfig extends AbstractMongoClientConfiguration {
-  @Value("${mongo.db.password}")
-  private String password;
-
-  @Value("${mongo.db.user}")
-  private String user;
+  @Value("${spring.data.mongodb.uri}")
+  private String connectionString;
 
   @Override
   protected String getDatabaseName() {
@@ -24,13 +21,10 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
   @Override
   public MongoClient mongoClient() {
 
-    String uriTemplate = "mongodb+srv://%s:%s@cluster0.cp3qm.mongodb.net/Blogango?retryWrites=true&w=majority&appName=Cluster0";
-    String finalConnectionString = String.format(uriTemplate, user, password);
-
-    ConnectionString connectionString = new ConnectionString(finalConnectionString);
+    ConnectionString connString = new ConnectionString(connectionString);
 
     MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
-            .applyConnectionString(connectionString)
+            .applyConnectionString(connString)
             .build();
 
     return MongoClients.create(mongoClientSettings);
