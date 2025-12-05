@@ -45,7 +45,7 @@ public class PostController {
 
     @GetMapping("/categoria/{categoriaId}")
     public ResponseEntity<Page<Post>> listarPorCategoria(
-            @PathVariable @NotBlank String categoriaId,
+            @PathVariable String categoriaId,
             @PageableDefault(size = 10, page = 0, sort = "dataCriacao", direction = Sort.Direction.DESC) Pageable pageable
     ) {
         Categoria categoria = categoriaRepository.findById(categoriaId).orElseThrow();
