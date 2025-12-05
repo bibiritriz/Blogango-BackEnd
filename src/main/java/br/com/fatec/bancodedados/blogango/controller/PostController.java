@@ -7,15 +7,12 @@ import br.com.fatec.bancodedados.blogango.model.Post;
 import br.com.fatec.bancodedados.blogango.repository.CategoriaRepository;
 import br.com.fatec.bancodedados.blogango.service.PostService;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -62,7 +59,7 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<String> criarPost(@RequestBody @Valid @NotNull PostCreateDTO dto) {
+    public ResponseEntity<String> criarPost(@RequestBody @Valid PostCreateDTO dto) {
         Post novoPost = new Post();
 
         novoPost.setTitulo(dto.titulo());
@@ -81,13 +78,13 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> atualizarPost(@PathVariable String id, @RequestBody @Valid @NotNull PostUpdateDTO dto) {
+    public ResponseEntity<Void> atualizarPost(@PathVariable String id, @RequestBody @Valid PostUpdateDTO dto) {
         postService.atualizarPost(id, dto);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarPost(@PathVariable @NotNull String id) {
+    public ResponseEntity<Void> deletarPost(@PathVariable String id) {
         postService.deletarPost(id);
         return ResponseEntity.noContent().build();
     }
