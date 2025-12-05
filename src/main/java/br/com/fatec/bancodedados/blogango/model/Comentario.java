@@ -3,11 +3,16 @@ package br.com.fatec.bancodedados.blogango.model;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Document(collection = "comentarios")
 public class Comentario {
   @Id
@@ -30,60 +35,4 @@ public class Comentario {
 
   private LocalDateTime dataCriacao = LocalDateTime.now();
   private Boolean aprovado = false;
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getPostId() {
-    return postId;
-  }
-
-  public void setPostId(String postId) {
-    this.postId = postId;
-  }
-
-  public String getAutor() {
-    return autor;
-  }
-
-  public void setAutor(String autor) {
-    this.autor = autor;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public String getConteudo() {
-    return conteudo;
-  }
-
-  public void setConteudo(String conteudo) {
-    this.conteudo = conteudo;
-  }
-
-  public LocalDateTime getDataCriacao() {
-    return dataCriacao;
-  }
-
-  public void setDataCriacao(LocalDateTime dataCriacao) {
-    this.dataCriacao = dataCriacao;
-  }
-
-  public Boolean getAprovado() {
-    return aprovado;
-  }
-
-  public void setAprovado(Boolean aprovado) {
-    this.aprovado = aprovado;
-  }
 }
