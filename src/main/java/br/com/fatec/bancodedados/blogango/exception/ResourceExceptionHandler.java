@@ -32,7 +32,7 @@ public class ResourceExceptionHandler {
   }
 
   @ExceptionHandler(ResourceNotFoundException.class)
-  public ResponseEntity<StandardError> entidadeNaoEcontrada(ResourceNotFoundException e, HttpServletRequest request){
+  public ResponseEntity<StandardError> entidadeNaoEncontrada(ResourceNotFoundException e, HttpServletRequest request){
     HttpStatus status = HttpStatus.NOT_FOUND;
 
     StandardError err = new StandardError();
