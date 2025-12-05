@@ -2,6 +2,7 @@ package br.com.fatec.bancodedados.blogango.service;
 
 import br.com.fatec.bancodedados.blogango.dto.PostCreateDTO;
 import br.com.fatec.bancodedados.blogango.dto.PostUpdateDTO;
+import br.com.fatec.bancodedados.blogango.exception.ResourceNotFoundException;
 import br.com.fatec.bancodedados.blogango.mapper.PostMapper;
 import br.com.fatec.bancodedados.blogango.model.Post;
 import br.com.fatec.bancodedados.blogango.model.StatusPost;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Service
@@ -61,7 +63,8 @@ public class PostService {
     }
 
     public Post obterPost(String id){
-        Post post = postRepository.findById(id).orElseThrow();
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Post com id " + id + " não encontrado"));
 
         post.setVisualizacoes(post.getVisualizacoes() + 1);
 
@@ -71,19 +74,21 @@ public class PostService {
     }
 
     public void atualizarPost(String id, PostUpdateDTO post){
-        Post postEncontrado = postRepository.findById(id).orElseThrow();
+        Post postEncontrado = postRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Post com id " + id + " não encontrado"));
 
         postMapper.updateEntityFromDto(post, postEncontrado);
 
         postEncontrado.setCategorias(categoriaService.buscarCategoriasPorId(post.categorias()));
-        postEncontrado.setDataAtualizacao(LocalDateTime.now());
+        postEncontrado.setDataAtualizacao(Instant.now());
         postEncontrado.setSlug(gerarSlug(post.titulo()));
 
         postRepository.save(postEncontrado);
     }
 
     public void deletarPost(String id){
-        Post post = postRepository.findById(id).orElseThrow();
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Post com id " + id + " não encontrado"));
 
         post.setStatus(StatusPost.ARQUIVADO);
 

@@ -2,6 +2,7 @@ package br.com.fatec.bancodedados.blogango.controller;
 
 import br.com.fatec.bancodedados.blogango.dto.PostCreateDTO;
 import br.com.fatec.bancodedados.blogango.dto.PostUpdateDTO;
+import br.com.fatec.bancodedados.blogango.exception.ResourceNotFoundException;
 import br.com.fatec.bancodedados.blogango.mapper.PostMapper;
 import br.com.fatec.bancodedados.blogango.model.Categoria;
 import br.com.fatec.bancodedados.blogango.model.Post;

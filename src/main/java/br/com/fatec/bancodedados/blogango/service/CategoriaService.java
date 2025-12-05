@@ -1,5 +1,6 @@
 package br.com.fatec.bancodedados.blogango.service;
 
+import br.com.fatec.bancodedados.blogango.exception.ResourceNotFoundException;
 import br.com.fatec.bancodedados.blogango.model.Categoria;
 import br.com.fatec.bancodedados.blogango.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class CategoriaService {
     }
 
     public Categoria obterCategoria(String id){
-        return categoriaRepository.findById(id).orElseThrow();
+        return categoriaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Categoria com id " + id + " não encontrada"));
     }
 
     public List<Categoria> listarCategorias(){
