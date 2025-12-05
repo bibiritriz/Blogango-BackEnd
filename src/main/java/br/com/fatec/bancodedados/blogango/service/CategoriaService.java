@@ -21,7 +21,15 @@ public class CategoriaService {
         return categoriaRepository.save(categoria);
     }
 
+    public Categoria obterCategoria(String id){
+        return categoriaRepository.findById(id).orElseThrow();
+    }
+
     public List<Categoria> listarCategorias(){
         return categoriaRepository.findAll();
+    }
+
+    public List<Categoria> buscarCategoriasPorId(List<String> ids){
+        return categoriaRepository.findAllById(ids);
     }
 }

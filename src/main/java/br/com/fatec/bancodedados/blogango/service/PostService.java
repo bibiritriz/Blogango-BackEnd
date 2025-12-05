@@ -1,6 +1,8 @@
 package br.com.fatec.bancodedados.blogango.service;
 
+import br.com.fatec.bancodedados.blogango.dto.PostCreateDTO;
 import br.com.fatec.bancodedados.blogango.dto.PostUpdateDTO;
+import br.com.fatec.bancodedados.blogango.mapper.PostMapper;
 import br.com.fatec.bancodedados.blogango.model.Post;
 import br.com.fatec.bancodedados.blogango.model.StatusPost;
 import br.com.fatec.bancodedados.blogango.repository.PostRepository;
@@ -16,6 +18,12 @@ public class PostService {
     @Autowired
     private PostRepository postRepository;
 
+    @Autowired
+    private PostMapper postMapper;
+
+    @Autowired
+    private CategoriaService categoriaService;
+
     public Page<Post> listarPostsPublicos(Pageable pageable){
         return postRepository.findByStatusOrderByDataCriacaoDesc(StatusPost.PUBLICADO, pageable);
     }
@@ -29,12 +37,26 @@ public class PostService {
     }
 
     private String gerarSlug(String titulo){
-        return titulo.toLowerCase().replaceAll("[^a-z0-9]+", "-").replaceAll("^-|-$", "").trim();
+        int quantidade = postRepository.findBySlug(titulo);
+
+        String quantidadeParaSlug = "-" + String.valueOf(quantidade);
+
+        String slugPadrao = titulo.toLowerCase().replaceAll("[^a-z0-9]+", "-")
+                .replaceAll("^-|-$", "").trim();
+
+        if(quantidade > 0){
+            return slugPadrao.concat(quantidadeParaSlug);
+        }
+
+        return slugPadrao;
     }
 
-    public Post criarPost(Post post){
-        post.setSlug(gerarSlug(post.getTitulo()));
-        return postRepository.save(post);
+    public Post criarPost(PostCreateDTO dto){
+        Post novoPost = postMapper.toEntity(dto);
+
+        novoPost.setSlug(gerarSlug(novoPost.getTitulo()));
+
+        return postRepository.save(novoPost);
     }
 
     public Post obterPost(String id){
@@ -50,12 +72,11 @@ public class PostService {
     public void atualizarPost(String id, PostUpdateDTO post){
         Post postEncontrado = postRepository.findById(id).orElseThrow();
 
-        postEncontrado.setTitulo(post.titulo());
+        postMapper.updateEntityFromDto(post, postEncontrado);
+
+        postEncontrado.setCategorias(categoriaService.buscarCategoriasPorId(post.categorias()));
         postEncontrado.setDataAtualizacao(LocalDateTime.now());
-        postEncontrado.setConteudo(post.conteudo());
-        postEncontrado.setCategorias(post.categorias());
         postEncontrado.setSlug(gerarSlug(post.titulo()));
-        postEncontrado.setStatus(post.status());
 
         postRepository.save(postEncontrado);
     }

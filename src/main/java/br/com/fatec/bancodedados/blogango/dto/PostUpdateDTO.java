@@ -17,9 +17,9 @@ public record PostUpdateDTO(
     @Size(min = 50, max = 5000, message = "Conteúdo deve ter entre 50 e 5000 caracteres")
     String conteudo,
 
-    @NotNull(message = "Categoria é obrigatória")
-    @Size(min=1, max=5)
-    List<Categoria> categorias,
+    @NotBlank(message = "Categorias é obrigatória")
+    @Size(min=1, max=5, message = "Categorias deve ter pelo menos 1 id de categoria")
+    List<String> categorias,
 
     StatusPost status) {
 }
