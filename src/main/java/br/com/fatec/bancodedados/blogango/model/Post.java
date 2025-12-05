@@ -15,6 +15,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Document(collection = "posts")
 public class Post {
     @Id
