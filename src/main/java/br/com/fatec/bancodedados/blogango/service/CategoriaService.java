@@ -6,7 +6,9 @@ import br.com.fatec.bancodedados.blogango.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.Normalizer;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Service
 public class CategoriaService {
@@ -14,7 +16,12 @@ public class CategoriaService {
     private CategoriaRepository categoriaRepository;
 
     private String gerarSlug(String nome){
-        return nome.toLowerCase().replaceAll("[^a-z0-9]+", "-").replaceAll("^-|-$", "").trim();
+        String nomeNormalizado = Normalizer.normalize(nome, Normalizer.Form.NFD);
+
+        Pattern pattern = Pattern.compile("\\p{M}");
+        String nomeSemAcento = pattern.matcher(nomeNormalizado).replaceAll("");
+
+        return nomeSemAcento.toLowerCase().replaceAll("[^a-z0-9]+", "-").replaceAll("^-|-$", "").trim();
     }
 
     public Categoria criarCategoria(Categoria categoria){

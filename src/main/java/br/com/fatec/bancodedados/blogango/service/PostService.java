@@ -12,8 +12,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.text.Normalizer;
 import java.time.Instant;
-import java.time.LocalDateTime;
+import java.util.regex.Pattern;
 
 @Service
 public class PostService {
@@ -41,9 +42,14 @@ public class PostService {
     private String gerarSlug(String titulo){
         long quantidade = postRepository.countBySlug(titulo);
 
+        String tituloNormalizado = Normalizer.normalize(titulo, Normalizer.Form.NFD);
+
+        Pattern pattern = Pattern.compile("\\p{M}");
+        String semAcento = pattern.matcher(tituloNormalizado).replaceAll("");
+
         String sufixoSlug = "-" + quantidade;
 
-        String slugPadrao = titulo.toLowerCase().replaceAll("[^a-z0-9]+", "-")
+        String slugPadrao = semAcento.toLowerCase().replaceAll("[^a-z0-9]+", "-")
                 .replaceAll("^-|-$", "").trim();
 
         if(quantidade > 0){
