@@ -41,13 +41,13 @@ public class PostService {
     private String gerarSlug(String titulo){
         long quantidade = postRepository.countBySlug(titulo);
 
-        String quantidadeParaSlug = "-" + String.valueOf(quantidade);
+        String sufixoSlug = "-" + quantidade;
 
         String slugPadrao = titulo.toLowerCase().replaceAll("[^a-z0-9]+", "-")
                 .replaceAll("^-|-$", "").trim();
 
         if(quantidade > 0){
-            return slugPadrao.concat(quantidadeParaSlug);
+            return slugPadrao.concat(sufixoSlug);
         }
 
         return slugPadrao;

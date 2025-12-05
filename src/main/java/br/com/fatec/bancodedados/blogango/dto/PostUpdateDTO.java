@@ -19,9 +19,8 @@ public record PostUpdateDTO(
     String conteudo,
 
     @NotNull(message = "Categorias são obrigatórias")
-    @NotEmpty(message = "Categorias não podem ser vazia")
     @Size(min=1, max=5, message = "Categorias devem ter pelo menos 1 id de categoria")
-    List<String> categorias,
+    List<@NotBlank(message = "O id da categoria não pode ser vazio")String> categorias,
 
     StatusPost status) {
 }

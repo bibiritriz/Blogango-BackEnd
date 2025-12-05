@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
@@ -16,7 +17,8 @@ public class Categoria {
     private String id;
 
     @NotBlank(message = "Nome é obrigatório")
-    @Size(min = 3, max = 10, message = "Nome deve ter entre 10 e 200 caracteres")
+    @Size(min = 3, max = 200, message = "Nome deve ter entre 10 e 200 caracteres")
+    @Indexed(unique = true)
     private String nome;
 
     @Size(max = 200, message = "Descrição deve ter entre 10 e 200 caracteres")
