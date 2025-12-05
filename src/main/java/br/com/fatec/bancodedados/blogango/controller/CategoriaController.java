@@ -4,7 +4,7 @@ import br.com.fatec.bancodedados.blogango.dto.CategoriaCreateDTO;
 import br.com.fatec.bancodedados.blogango.model.Categoria;
 import br.com.fatec.bancodedados.blogango.service.CategoriaService;
 import jakarta.validation.Valid;
-import org.jetbrains.annotations.NotNull;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
