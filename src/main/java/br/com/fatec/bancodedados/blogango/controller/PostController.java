@@ -19,8 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping("posts")
-@CrossOrigin(origins = "*")
+@RequestMapping("/api/posts")
 public class PostController {
     @Autowired
     private PostService postService;

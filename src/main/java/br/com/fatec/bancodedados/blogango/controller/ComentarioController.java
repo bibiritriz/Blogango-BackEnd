@@ -18,7 +18,6 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/api/comentarios")
-@CrossOrigin(origins = "*")
 public class ComentarioController {
 
   @Autowired()
