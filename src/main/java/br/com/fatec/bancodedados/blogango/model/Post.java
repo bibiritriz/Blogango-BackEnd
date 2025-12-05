@@ -22,7 +22,7 @@ public class Post {
     private String id;
 
     @NotBlank(message = "Título é obrigatório")
-    @Size(min = 10, max = 200, message = "Titulo deve ter entre 10 e 200 caracteres")
+    @Size(min = 10, max = 200, message = "Título deve ter entre 10 e 200 caracteres")
     private String titulo;
 
 
