@@ -1,7 +1,6 @@
 package br.com.fatec.bancodedados.blogango.service;
 
 import br.com.fatec.bancodedados.blogango.dto.PostUpdateDTO;
-import br.com.fatec.bancodedados.blogango.model.Categoria;
 import br.com.fatec.bancodedados.blogango.model.Post;
 import br.com.fatec.bancodedados.blogango.model.StatusPost;
 import br.com.fatec.bancodedados.blogango.repository.PostRepository;
@@ -22,7 +21,7 @@ public class PostService {
     }
 
     public Page<Post> listarPorCategoria(String categoriaNome, Pageable pageable) {
-        return postRepository.findByStatusAndCategoria_NomeOrderByDataCriacaoDesc(StatusPost.PUBLICADO, categoriaNome, pageable);
+        return postRepository.findByStatusAndCategorias_NomeOrderByDataCriacaoDesc(StatusPost.PUBLICADO, categoriaNome, pageable);
     }
 
     public Page<Post> listarPorTitulo(String termo, Pageable pageable) {
