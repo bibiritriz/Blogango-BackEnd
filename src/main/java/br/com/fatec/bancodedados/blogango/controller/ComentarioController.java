@@ -1,7 +1,7 @@
 package br.com.fatec.bancodedados.blogango.controller;
 
 import br.com.fatec.bancodedados.blogango.dto.ComentarioCreateDTO;
-import br.com.fatec.bancodedados.blogango.dto.ComentarioEditDTO;
+import br.com.fatec.bancodedados.blogango.dto.ComentarioUpdateDTO;
 import br.com.fatec.bancodedados.blogango.model.Comentario;
 import br.com.fatec.bancodedados.blogango.service.ComentarioService;
 import jakarta.validation.Valid;
@@ -55,9 +55,9 @@ public class ComentarioController {
   @PutMapping("/{comentarioId}")
   public ResponseEntity<Void> editarComentario(
           @PathVariable String comentarioId,
-          @RequestBody @Valid ComentarioEditDTO comentarioEditDTO
+          @RequestBody @Valid ComentarioUpdateDTO comentarioUpdateDTO
   ){
-    this.comentarioService.editarComentario(comentarioId, comentarioEditDTO);
+    this.comentarioService.editarComentario(comentarioId, comentarioUpdateDTO);
     return ResponseEntity.noContent().build();
   }
 

@@ -24,5 +24,6 @@ public class Categoria {
     @Size(max = 200, message = "Descrição deve ter entre 10 e 200 caracteres")
     private String descricao;
 
+    private String cor;
     private String slug;
 }

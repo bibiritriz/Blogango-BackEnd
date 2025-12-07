@@ -1,8 +1,9 @@
 package br.com.fatec.bancodedados.blogango.service;
 
 import br.com.fatec.bancodedados.blogango.dto.ComentarioCreateDTO;
-import br.com.fatec.bancodedados.blogango.dto.ComentarioEditDTO;
+import br.com.fatec.bancodedados.blogango.dto.ComentarioUpdateDTO;
 import br.com.fatec.bancodedados.blogango.exception.ResourceNotFoundException;
+import br.com.fatec.bancodedados.blogango.mapper.ComentarioMapper;
 import br.com.fatec.bancodedados.blogango.model.Comentario;
 import br.com.fatec.bancodedados.blogango.model.Post;
 import br.com.fatec.bancodedados.blogango.repository.ComentarioRepository;
@@ -21,16 +22,16 @@ public class ComentarioService {
   @Autowired
   private PostRepository postRepository;
 
+  @Autowired
+  private ComentarioMapper comentarioMapper;
+
   public Page<Comentario> listarComentariosPorPost(String postId, Pageable pageable){
     return this.comentarioRepository.findByPostId(postId, pageable);
   }
 
   public Comentario criarComentario(ComentarioCreateDTO comentarioCreateDTO){
-    Comentario comentario = new Comentario();
-    comentario.setPostId(comentarioCreateDTO.postId());
-    comentario.setAutor(comentarioCreateDTO.autor());
-    comentario.setEmail(comentarioCreateDTO.email());
-    comentario.setConteudo(comentarioCreateDTO.conteudo());
+    Comentario comentario = comentarioMapper.toEntity(comentarioCreateDTO);
+
     return this.comentarioRepository.save(comentario);
   }
 
@@ -44,16 +45,12 @@ public class ComentarioService {
     this.comentarioRepository.deleteById(comentarioId);
   }
 
-  public void editarComentario(String comentarioId, ComentarioEditDTO comentarioEditDTO){
+  public void editarComentario(String comentarioId, ComentarioUpdateDTO comentarioUpdateDTO){
     Comentario comentario = this.comentarioRepository.findById(comentarioId)
             .orElseThrow(() -> new ResourceNotFoundException("Comentário não encontrado com ID: " + comentarioId));
-
-    comentario.setAutor(comentarioEditDTO.autor());
-    comentario.setEmail(comentarioEditDTO.email());
-    comentario.setConteudo(comentarioEditDTO.conteudo());
+    comentarioMapper.updateEntityFromDto(comentarioUpdateDTO, comentario);
 
     this.comentarioRepository.save(comentario);
-
   }
 
   public void aprovarComentario(String comentarioId){
