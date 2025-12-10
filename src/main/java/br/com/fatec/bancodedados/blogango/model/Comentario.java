@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -25,9 +26,9 @@ public class Comentario {
   @Size(min = 3, max = 100, message = "Autor deve ter no mínimo 3 caracteres")
   private String autor;
 
-  @NotBlank(message = "Email é obrigatório")
-  @Email(message = "Email deve ser válido")
-  private String email;
+  @NotBlank(message = "Usuario é obrigatório")
+  @Indexed(unique = true)
+  private String usuario;
 
   @NotBlank(message = "Conteúdo é obrigatório")
   @Size(min = 5,max = 1000, message = "O conteúdo deve ter no mínimo 5 caracteres")
