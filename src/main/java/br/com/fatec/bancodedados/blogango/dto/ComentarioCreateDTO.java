@@ -12,7 +12,6 @@ public record ComentarioCreateDTO (
   @Size(min = 3, max = 100, message = "Autor deve ter no mínimo 3 caracteres")
   String autor,
   @NotBlank(message = "Usuario é obrigatório")
-  @Indexed(unique = true)
   String usuario,
   @NotBlank(message = "Conteúdo é obrigatório")
   @Size(min = 5,max = 1000, message = "O conteúdo deve ter no mínimo 5 caracteres")
