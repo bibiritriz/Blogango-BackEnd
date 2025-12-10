@@ -16,6 +16,13 @@ public class CategoriaService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
+    private static final List<String> CORES_PADRAO = List.of(
+            "24CE6B",
+            "F65E61",
+            "5E97F6",
+            "FFD000"
+    );
+
     private String gerarSlug(String nome){
         String nomeNormalizado = Normalizer.normalize(nome, Normalizer.Form.NFD);
 
@@ -28,6 +35,10 @@ public class CategoriaService {
     public Categoria criarCategoria(Categoria categoria){
         categoria.setSlug(gerarSlug(categoria.getNome()));
         categoria.setNome(categoria.getNome().toUpperCase().trim());
+
+        String corSelecionada = this.definirCorAutomatica();
+
+        categoria.setCor(corSelecionada);
         return categoriaRepository.save(categoria);
     }
 
@@ -41,5 +52,20 @@ public class CategoriaService {
 
     public List<Categoria> buscarCategoriasPorId(List<String> ids){
         return categoriaRepository.findAllById(ids);
+    }
+
+    private String definirCorAutomatica() {
+        List<String> coresUsadas = this.categoriaRepository.findDistinctCorBy();
+
+        List<String> coresDisponiveis = CORES_PADRAO.stream()
+                .filter(cor -> !coresUsadas.contains(cor))
+                .toList();
+
+        if (coresDisponiveis.isEmpty()) {
+            int indexAleatorio = (int) (Math.random() * CORES_PADRAO.size());
+            return CORES_PADRAO.get(indexAleatorio);
+        }
+
+        return coresDisponiveis.get(0);
     }
 }
