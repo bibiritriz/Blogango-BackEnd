@@ -61,7 +61,7 @@ public class PostService {
     public Post criarPost(PostCreateDTO dto){
         Post novoPost = postMapper.toEntity(dto);
 
-        novoPost.setCategorias(categoriaService.buscarCategoriasPorId(dto.categorias()));
+        novoPost.setCategorias(dto.categorias());
         novoPost.setStatus(dto.status());
         novoPost.setSlug(gerarSlug(novoPost.getTitulo()));
 
@@ -85,7 +85,7 @@ public class PostService {
 
         postMapper.updateEntityFromDto(post, postEncontrado);
 
-        postEncontrado.setCategorias(categoriaService.buscarCategoriasPorId(post.categorias()));
+        postEncontrado.setCategorias(post.categorias());
         postEncontrado.setDataAtualizacao(Instant.now());
         postEncontrado.setSlug(gerarSlug(post.titulo()));
 
