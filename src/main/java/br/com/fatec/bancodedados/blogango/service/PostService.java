@@ -47,12 +47,11 @@ public class PostService {
         Pattern pattern = Pattern.compile("\\p{M}");
         String semAcento = pattern.matcher(tituloNormalizado).replaceAll("");
 
-        String sufixoSlug = "-" + quantidade;
-
         String slugPadrao = semAcento.toLowerCase().replaceAll("[^a-z0-9]+", "-")
                 .replaceAll("^-|-$", "").trim();
 
         if(quantidade > 0){
+            String sufixoSlug = "-" + quantidade;
             return slugPadrao.concat(sufixoSlug);
         }
 
@@ -63,6 +62,7 @@ public class PostService {
         Post novoPost = postMapper.toEntity(dto);
 
         novoPost.setCategorias(categoriaService.buscarCategoriasPorId(dto.categorias()));
+        novoPost.setStatus(dto.status());
         novoPost.setSlug(gerarSlug(novoPost.getTitulo()));
 
         return postRepository.save(novoPost);

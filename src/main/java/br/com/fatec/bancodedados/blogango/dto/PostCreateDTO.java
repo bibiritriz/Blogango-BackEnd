@@ -1,6 +1,7 @@
 package br.com.fatec.bancodedados.blogango.dto;
 
 import br.com.fatec.bancodedados.blogango.model.Categoria;
+import br.com.fatec.bancodedados.blogango.model.StatusPost;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -20,6 +21,9 @@ public record PostCreateDTO (
         @NotBlank(message = "Autor é obrigatório")
         @Size(min = 3, max = 100, message = "Autor deve ter entre 3 e 100 caracteres")
         String autor,
+
+        @NotNull
+        StatusPost status,
 
         @NotNull(message = "Categorias são obrigatórias")
         @Size(min=1, max=5, message = "Deve haver ao menos 1 id de categoria em categorias")
