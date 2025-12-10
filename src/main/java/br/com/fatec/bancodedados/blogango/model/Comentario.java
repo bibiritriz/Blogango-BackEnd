@@ -1,13 +1,11 @@
 package br.com.fatec.bancodedados.blogango.model;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -27,7 +25,6 @@ public class Comentario {
   private String autor;
 
   @NotBlank(message = "Usuario é obrigatório")
-  @Indexed(unique = true)
   private String usuario;
 
   @NotBlank(message = "Conteúdo é obrigatório")
