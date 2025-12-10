@@ -121,8 +121,9 @@ O `Blogango-BackEnd` expõe endpoints RESTful para o gerenciamento dos recursos 
 
 ## 📧 Créditos e Contato
 
-Este projeto foi criado por **bibiritriz**.
+Este projeto foi criado por **bibiritriz** e **IsaqueBatist**.
 
-Para dúvidas, sugestões ou contato, você pode acessar o perfil do autor no GitHub:
+Para dúvidas, sugestões ou contato, você pode acessar os perfis dos autores no GitHub:
 
-[GitHub de bibiritriz](https://github.com/bibiritriz)
+[GitHub de bibiritriz](https://github.com/bibiritriz) <br>
+[Github de IsaqueBatist](https://github.com/IsaqueBatist)
