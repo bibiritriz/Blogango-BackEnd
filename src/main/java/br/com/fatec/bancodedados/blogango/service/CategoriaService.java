@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.Normalizer;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 @Service
@@ -33,6 +34,7 @@ public class CategoriaService {
 
     public Categoria criarCategoria(Categoria categoria){
         categoria.setSlug(gerarSlug(categoria.getNome()));
+        categoria.setNome(categoria.getNome().toUpperCase().trim());
 
         String corSelecionada = this.definirCorAutomatica();
 
