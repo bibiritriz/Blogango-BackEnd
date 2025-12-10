@@ -105,17 +105,17 @@ O `Blogango-BackEnd` expõe endpoints RESTful para o gerenciamento dos recursos 
 
 | Recurso | Método HTTP | Endpoint Sugerido | Descrição |
 | :--- | :--- | :--- | :--- |
-| **Posts** | `POST` | `api/posts` | Cria um novo post no blog. |
-| | `GET` | `api/posts` | Lista todos os posts. |
-| | `GET` | `api/posts/{id}` | Recupera um post específico por ID. |
-| | `PUT` | `api/posts/{id}` | Atualiza um post existente. |
-| | `DELETE` | `api/posts/{id}` | Remove um post. |
-| **Comentários** | `POST` | `api/comentarios` | Cria um novo comentário. |
-| | `GET` | `api/comentarios/{postId}` | Recupera todos os comentários de um post. |
-| | `PUT` | `api/comentarios/{id}` | Edita um comentário existente. |
-| | `DELETE` | `api/comentarios/{id}` | Deleta um comentário. |
-| **Categorias** | `GET` | `api/categorias` | Lista todas as categorias. |
-| | `POST` | `api/categorias` | Cria uma nova categoria. |
+| **Posts** | `POST` | `/api/posts` | Cria um novo post no blog. |
+| | `GET` | `/api/posts` | Lista todos os posts. |
+| | `GET` | `/api/posts/{id}` | Recupera um post específico por ID. |
+| | `PUT` | `/api/posts/{id}` | Atualiza um post existente. |
+| | `DELETE` | `/api/posts/{id}` | Remove um post. |
+| **Comentários** | `POST` | `/api/comentarios` | Cria um novo comentário. |
+| | `GET` | `/api/comentarios/{postId}` | Recupera todos os comentários de um post. |
+| | `PUT` | `/api/comentarios/{id}` | Edita um comentário existente. |
+| | `DELETE` | `/api/comentarios/{id}` | Deleta um comentário. |
+| **Categorias** | `GET` | `/api/categorias` | Lista todas as categorias. |
+| | `POST` | `/api/categorias` | Cria uma nova categoria. |
 
 ---
 
