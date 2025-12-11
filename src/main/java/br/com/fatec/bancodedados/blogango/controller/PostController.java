@@ -52,10 +52,10 @@ public class PostController {
 
     @GetMapping("/buscar")
     public ResponseEntity<Page<Post>> buscarPorTitulo(
-            @RequestParam String termo,
+            @RequestParam String titulo,
             @PageableDefault(size = 10, page = 0, sort = "dataCriacao", direction = Sort.Direction.DESC) Pageable pageable
     ) {
-        return ResponseEntity.ok(postService.listarPorTitulo(termo, pageable));
+        return ResponseEntity.ok(postService.listarPorTitulo(titulo, pageable));
     }
 
     @PostMapping
