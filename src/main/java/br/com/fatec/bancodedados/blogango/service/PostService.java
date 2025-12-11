@@ -79,6 +79,17 @@ public class PostService {
         return post;
     }
 
+    public Post obterPostPorSlug(String slug){
+        Post post = postRepository.findBySlug(slug)
+                .orElseThrow(() -> new ResourceNotFoundException("Post com slug " + slug + " não encontrado"));
+
+        post.setVisualizacoes(post.getVisualizacoes() + 1);
+
+        postRepository.save(post);
+
+        return post;
+    }
+
     public void atualizarPost(String id, PostUpdateDTO post){
         Post postEncontrado = postRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Post com id " + id + " não encontrado"));
