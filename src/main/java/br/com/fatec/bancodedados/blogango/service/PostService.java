@@ -81,7 +81,7 @@ public class PostService {
 
     public Post obterPostPorSlug(String slug){
         Post post = postRepository.findBySlug(slug)
-                .orElseThrow(() -> new ResourceNotFoundException("Post com slug " + slug + " não encontrado"));;
+                .orElseThrow(() -> new ResourceNotFoundException("Post com slug " + slug + " não encontrado"));
 
         post.setVisualizacoes(post.getVisualizacoes() + 1);
 
