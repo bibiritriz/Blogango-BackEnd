@@ -2,8 +2,6 @@ package br.com.fatec.bancodedados.blogango.controller;
 
 import br.com.fatec.bancodedados.blogango.dto.PostCreateDTO;
 import br.com.fatec.bancodedados.blogango.dto.PostUpdateDTO;
-import br.com.fatec.bancodedados.blogango.exception.ResourceNotFoundException;
-import br.com.fatec.bancodedados.blogango.mapper.PostMapper;
 import br.com.fatec.bancodedados.blogango.model.Categoria;
 import br.com.fatec.bancodedados.blogango.model.Post;
 import br.com.fatec.bancodedados.blogango.service.CategoriaService;
@@ -56,6 +54,13 @@ public class PostController {
             @PageableDefault(size = 10, page = 0, sort = "dataCriacao", direction = Sort.Direction.DESC) Pageable pageable
     ) {
         return ResponseEntity.ok(postService.listarPorTitulo(termo, pageable));
+    }
+
+    @GetMapping("/slug/{slug}")
+    public ResponseEntity<Post> obterPostPorSlug(
+            @PathVariable String slug
+    ) {
+        return ResponseEntity.ok(postService.obterPostPorSlug(slug));
     }
 
     @PostMapping

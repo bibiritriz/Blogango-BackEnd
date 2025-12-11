@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface PostRepository extends MongoRepository<Post, String> {
     Page<Post> findByStatusOrderByDataCriacaoDesc(StatusPost status, Pageable pageable);
@@ -14,6 +16,8 @@ public interface PostRepository extends MongoRepository<Post, String> {
     Page<Post> findByStatusAndCategorias_NomeOrderByDataCriacaoDesc(StatusPost status, String categoriaNome, Pageable pageable);
 
     Page<Post> findByStatusAndTituloContainingIgnoreCaseOrderByDataCriacaoDesc(StatusPost status, String titulo, Pageable pageable);
+
+    Optional<Post> findBySlug(String slug);
 
     long countBySlug(String slug);
 }
